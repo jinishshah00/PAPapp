@@ -5,7 +5,7 @@ This project is a platform to connect pet shelters with potential adopters, allo
 
 ## Project Structure
 
-```plaintext
+```
 Project Papaap
 ├── backend
 │   └── (contains backend code for user authentication and API endpoints)
@@ -38,9 +38,9 @@ npm install
 
 ### 3. Set Up Environment Variables
 
-Since `.env` is ignored, each team member will need a copy of this file. **Ask the project owner (or your team lead) for the `.env` file** and place it in the root of the project directory.
+Since `.env` is ignored, each team member will need a copy of this file. Check whatsapp, download the file and place it in the root of the project directory.
 
-```plaintext
+```
 Project Papaap
 ├── .env  (contains environment variables like JWT_SECRET, DB connection URI, etc.)
 ```
@@ -49,12 +49,7 @@ Project Papaap
 
 The project includes both backend and frontend servers.
 
-- To start the backend server:
-  ```bash
-  npm run backend
-  ```
-
-- To start the frontend server (Next.js):
+- To start both backend and frontend:
   ```bash
   npm run dev
   ```
@@ -65,8 +60,4 @@ The project includes both backend and frontend servers.
 
 - **Do not commit the `.env` file** to GitHub, as it contains sensitive information.
 - **Collaborate on the `development` branch** and avoid directly pushing to `main` unless changes are reviewed and tested.
-
-## Additional Notes
-
-Please follow the branching strategy discussed and ensure code is merged into `development` before moving to `main`.
-```
+- Please follow the branching strategy discussed and ensure code is merged into `development` before moving to `main`.

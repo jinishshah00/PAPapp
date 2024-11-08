@@ -5,10 +5,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "backend": "nodemon backend/server.js"
+    "dev": "concurrently \"npm run backend\" \"npm run start-frontend\"",
+    "backend": "nodemon backend/server.js",
+    "start-frontend": "next dev"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +25,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "concurrently": "^9.1.0",
     "nodemon": "^3.1.7"
   }
 }
