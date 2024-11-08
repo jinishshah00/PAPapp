@@ -5,7 +5,7 @@ This project is a platform to connect pet shelters with potential adopters, allo
 
 ## Project Structure
 
-```
+```plaintext
 Project Papaap
 ├── backend
 │   └── (contains backend code for user authentication and API endpoints)
