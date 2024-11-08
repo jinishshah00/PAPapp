@@ -15,6 +15,15 @@ const userSchema = mongoose.Schema({
             type: String,
             required: true,
         },
+        role: {
+            type: String,
+            enum: ['adopter', 'shelterOwner'],
+            required: true
+        },
+        specialSerialNumber: {
+            type: String,
+            required: function() { return this.role === 'shelterOwner'; } // Only required for shelter owners
+        }
     }, 
     {
         timpstamps: true,    
@@ -35,5 +44,9 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
 }
 
 const User = mongoose.model('User', userSchema);
+const Pet = mongoose.model('Pet', petSchema);
 
-export default User;
+export default {
+    User,
+    Pet
+};
