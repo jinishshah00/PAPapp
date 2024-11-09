@@ -44,9 +44,6 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
 }
 
 const User = mongoose.model('User', userSchema);
-const Pet = mongoose.model('Pet', petSchema);
 
-export default {
-    User,
-    Pet
-};
+
+export default User;
