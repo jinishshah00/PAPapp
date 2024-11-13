@@ -1,13 +1,14 @@
 // pages/_app.js
-import '../CSS/main.css'; // Import global CSS here
-import '../CSS/header.css'; // Import Header-specific CSS here
-import Header from '../components/Header';
+import '../CSS/main.css';
+import Header from '../components/header.js';
+import Footer from '../components/footer.js';
 
 export default function MyApp({ Component, pageProps }) {
     return (
         <>
             <Header />
             <Component {...pageProps} />
+            <Footer />
         </>
     );
 }

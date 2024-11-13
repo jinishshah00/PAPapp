@@ -1,86 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
+
 .homeContainer {
     width: 100%;
-    /* height: 940px; */
-    /* padding: 10% 0 10% 10%; */
+    height: 75vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--background-color);
-
 }
 
 .banner {
     position: relative;
     width: 80%;
-    height: 500px;
+    height: 100%;
     background-color: var(--secondary-color);
     border-radius: 10px;
-    padding: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* text-align: center; */
     margin-top: -50px;
 }
-/* 
-.leaves-image {
+
+.leavesImage {
     position: absolute;
-    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
-    max-width: 600px;
-    opacity: 0.8;
-    pointer-events: none;
+    max-width: 80%;
+    /* height: 40%; */
 }
+    
 
-.dog-image {
+.dogImage {
     position: absolute;
     bottom: 0;
-    right: -10px;
-    width: 150px;
-}
-
-.banner-content {
-    position: relative;
+    right: 3%;
+    width: 350px;
+    }
+        
+.bannerContent {
+    max-width: 400px;
+    position: absolute;
     z-index: 1;
+    bottom: 10%;
+    left: 10%;
 }
 
-.main-title {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin: 0;
+.bannerContent h1{
+    font-family: 'Moon Dance', cursive;
+    font-size: 5rem;
 }
 
-.sub-title {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    font-style: italic;
-    margin: 5px 0 20px;
+.bannerContent h2{
+    font-family: 'Moon Dance', cursive;
+    font-size: 3rem;
+    margin: -4rem 0 -1rem 0;
 }
 
-.description {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 20px;
+.bannerContent p{
+    font-size: 1.2rem;
 }
-
-.adopt-button {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.adopt-button:hover {
-    background-color: #C04D1A;
-}
-
-.footer {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: #555;
-    text-align: center;
-} */
