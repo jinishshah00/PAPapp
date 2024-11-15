@@ -54,6 +54,38 @@ body {
     font-size: 1.5rem;
 }
 
+.user-menu {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.dropdown button {
+    padding: 10px;
+    width: 100%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropdown button:hover {
+    background-color: #f0f0f0;
+}
+
+
 .footer-con {
     margin-top: -4vh;
     justify-self: center;

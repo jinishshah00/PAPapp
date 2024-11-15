@@ -9,21 +9,31 @@ import { validSSNs } from "../utils/validSSNs.js";
 const authUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
+    // Check if user exists
     const user = await User.findOne({ email });
 
-    if (user && await user.matchPassword(password)) {
-        generateToken(res, user._id);
-        res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            role: user.role, // Role added for updated functionality
-            specialSerialNumber: user.specialSerialNumber // Added to include if applicable
-        });
-    } else {
-        res.status(401);
-        throw new Error('Invalid email or password');
+    if (!user) {
+        res.status(404);
+        throw new Error('User not found. Please check your email or sign up.');
     }
+
+    // Check if password matches
+    const isPasswordMatch = await user.matchPassword(password);
+    if (!isPasswordMatch) {
+        res.status(401);
+        throw new Error('Invalid password. Please try again.');
+    }
+
+    // If user is found and password matches
+    generateToken(res, user._id);
+    res.status(200).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        specialSerialNumber: user.specialSerialNumber,
+        message: 'Authentication successful',
+    });
 });
 
 // @desc Register a new user
@@ -74,6 +84,7 @@ const logoutUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         expires: new Date(0)
     });
+    console.log(`Token Destroy`);
     res.status(200).json({ message: 'User logged out' });
 });
 
@@ -81,6 +92,27 @@ const logoutUser = asyncHandler(async (req, res) => {
 // route GET /api/users/profile
 // @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
+    // const token = req.cookies.jwt;
+
+    // if (token) {
+    //     try {
+    //             const user = {
+    //                 _id: req.user._id,
+    //                 name: req.user.name,
+    //                 email: req.user.email,
+    //                 role: req.user.role, // Role included for viewing
+    //                 specialSerialNumber: req.user.specialSerialNumber // Included if applicable
+    //             };
+    //             res.status(200).json({ user });
+    //     } catch (error) {
+    //         res.status(401);
+    //         throw new Error('Not authorized, token failed');
+    //     }
+    // } else {
+    //     res.status(401);
+    //     throw new Error('Not authorized, no token');
+    // }
+    
     const user = {
         _id: req.user._id,
         name: req.user.name,

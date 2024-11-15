@@ -1,0 +1,17 @@
+.signinBox {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for the box */
+    text-align: center;
+  }
+  
+  .signinBox h1 {
+    padding-top: 10px;
+    font-weight: 700;
+  }
+  
+  .signinBox .MuiTypography-subtitle1 {
+    color: #DE5C20; /* Primary color for the subtitle text */
+  }
+  
