@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 const petSchema = mongoose.Schema({
         name: { 
             type: String, 
-            required: true 
+            required: true ,
+            unique: true
         },
         breed: { 
             type: String, 
