@@ -18,9 +18,9 @@ export default function Header() {
     useEffect(() => {
         const checkLoginStatus = async () => {
             try {
-                const response = await axios.get('http://localhost:8529/api/users/profile', { withCredentials: true });
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/profile`, { withCredentials: true });
                 setIsLoggedIn(true);
-                setUserName(response.data.name);
+                setUserName(response.data.user.name);
             } catch (error) {
                 setIsLoggedIn(false);
                 setUserName('');
@@ -32,7 +32,7 @@ export default function Header() {
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:8529/api/users/logout', {}, { withCredentials: true });
+            await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/logout`, {}, { withCredentials: true });
             setIsLoggedIn(false);
             setUserName('');
             router.push('/'); // Redirect to the homepage after logout
@@ -63,14 +63,13 @@ export default function Header() {
 
                 {isLoggedIn ? (
                     <div className="nav-link user-menu">
-                        <Typography component="h1" variant="h5">
+                        <a className="nav-link" onClick={() => setShowDropdown(!showDropdown)}>
                             {userName}
-                        </Typography>
-                        <ArrowDropDownIcon className="icon" onClick={() => setShowDropdown(!showDropdown)} />
-                        
+                            <ArrowDropDownIcon className="icon" onClick={() => setShowDropdown(!showDropdown)} />
+                        </a>
                         {showDropdown && (
                             <div className="dropdown">
-                                <button onClick={() => router.push('/update-profile')}>Update Profile</button>
+                                <button onClick={() => router.push('/updateProfile')}>Update Profile</button>
                                 <button onClick={handleLogout}>Logout</button>
                             </div>
                         )}

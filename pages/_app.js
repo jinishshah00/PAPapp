@@ -8,7 +8,7 @@ export default function MyApp({ Component, pageProps }) {
     const router = useRouter();
 
     // Conditionally render header and footer only if the path is not "/login"
-    const showHeaderFooter = router.pathname !== '/login';
+    const showHeaderFooter = router.pathname !== '/login' && router.pathname !== '/register' && router.pathname !== '/updateProfile';
 
     return (
         <>

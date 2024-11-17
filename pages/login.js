@@ -24,7 +24,7 @@ const customTheme = createTheme({
   },
 });
 
-export default function CustomSignInPage() {
+export default function SignInPage() {
   const [error, setError] = useState(null); // State to handle error messages
   const router = useRouter(); // Next.js router
 
@@ -36,7 +36,7 @@ export default function CustomSignInPage() {
     const password = e.target.password.value;
 
     try {
-      const response = await axios.post('http://localhost:8529/api/users/auth', { email, password }, { withCredentials: true });
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/auth`, { email, password }, { withCredentials: true });
       console.log('User authenticated:', response.data);
 
       // Clear any previous error

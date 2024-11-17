@@ -61,9 +61,9 @@ body {
 
 .dropdown {
     position: absolute;
-    top: 100%;
+    top: 150%;
     right: 0;
-    background-color: white;
+    background-color: var(--background-color);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     overflow: hidden;
@@ -73,16 +73,18 @@ body {
 }
 
 .dropdown button {
-    padding: 10px;
+    padding: 1rem 2rem;
+    font-size:medium;
     width: 100%;
     border: none;
     background: none;
     cursor: pointer;
     text-align: left;
+    color: var(--primary-color);
 }
 
 .dropdown button:hover {
-    background-color: #f0f0f0;
+    background-color: var(--secondary-color);
 }
 
 
