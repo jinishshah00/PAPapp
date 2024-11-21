@@ -2,8 +2,10 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/adopt": "pages/adopt.js",
   "/": "pages/index.js",
   "/login": "pages/login.js",
   "/register": "pages/register.js",
-  "/updateProfile": "pages/updateProfile.js"
+  "/editPets": "pages/editPets.js",
+  "/addPet": "pages/addPet.js"
 }

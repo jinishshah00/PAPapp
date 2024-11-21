@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { AppProvider } from '@toolpad/core/AppProvider';
+// import { AppProvider } from '@toolpad/core/AppProvider';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Button, TextField, Typography, Box, Container, Alert } from '@mui/material';
 import styles from '../CSS/login.module.css';
@@ -58,7 +58,7 @@ export default function SignInPage() {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <AppProvider theme={customTheme}>
+      {/* <AppProvider theme={customTheme}> */}
         <Container maxWidth='xs' sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
           <Box className={styles.signinBox}>
             <Typography component="h1" variant="h5">
@@ -106,7 +106,7 @@ export default function SignInPage() {
             </Box>
           </Box>
         </Container>
-      </AppProvider>
+      {/* </AppProvider> */}
     </ThemeProvider>
   );
 }

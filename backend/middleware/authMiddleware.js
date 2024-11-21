@@ -22,4 +22,14 @@ const protect = asyncHandler(async (req, res, next) =>{
     }
 });
 
-export { protect };
+const roleCheck = asyncHandler(async (req, res, next) => {
+    if (req.user && req.user.role === 'shelterOwner') {
+        next();
+    } else {
+        res.status(403);
+        throw new Error('Not authorized, shelter owner access required');
+    }
+});
+
+
+export { protect, roleCheck };

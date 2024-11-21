@@ -9,9 +9,10 @@ import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-export default function Header() {
+export default function Header({ onAuthChange }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userName, setUserName] = useState('');
+    const [userRole, setUserRole] = useState(''); // Store the user's role (shelterOwner, etc.)
     const [showDropdown, setShowDropdown] = useState(false);
     const router = useRouter();
 
@@ -21,20 +22,25 @@ export default function Header() {
                 const response = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/profile`, { withCredentials: true });
                 setIsLoggedIn(true);
                 setUserName(response.data.user.name);
+                setUserRole(response.data.user.role);
+                onAuthChange(true, response.data.user.role);
             } catch (error) {
                 setIsLoggedIn(false);
                 setUserName('');
+                setUserRole('');
+                onAuthChange(false, '');
             }
         };
-        
+
         checkLoginStatus();
-    }, []);
+    }, [onAuthChange]);
 
     const handleLogout = async () => {
         try {
             await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/logout`, {}, { withCredentials: true });
             setIsLoggedIn(false);
             setUserName('');
+            setUserRole('');
             router.push('/'); // Redirect to the homepage after logout
         } catch (error) {
             console.error('Logout failed', error);
@@ -65,11 +71,14 @@ export default function Header() {
                     <div className="nav-link user-menu">
                         <a className="nav-link" onClick={() => setShowDropdown(!showDropdown)}>
                             {userName}
-                            <ArrowDropDownIcon className="icon" onClick={() => setShowDropdown(!showDropdown)} />
+                            <ArrowDropDownIcon className="icon" />
                         </a>
                         {showDropdown && (
                             <div className="dropdown">
                                 <button onClick={() => router.push('/updateProfile')}>Update Profile</button>
+                                {userRole === 'shelterOwner' && (
+                                    <button onClick={() => router.push('/managePets')}>Manage Pets</button>
+                                )}
                                 <button onClick={handleLogout}>Logout</button>
                             </div>
                         )}

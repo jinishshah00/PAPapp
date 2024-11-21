@@ -1,0 +1,178 @@
+import asyncHandler from "express-async-handler";
+import Pet from "../models/petModel.js";
+import multer from "multer";
+import path from "path";
+
+// Configure storage for multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(process.cwd(), "backend/src")); // Save images to the src folder
+  },
+  filename: (req, file, cb) => {
+    const petName = req.body.name.replace(/\s+/g, "").toLowerCase();
+    cb(null, `${petName}img${path.extname(file.originalname)}`);
+  },
+});
+
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png/;
+    const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimeType = fileTypes.test(file.mimetype);
+
+    if (extname && mimeType) {
+      cb(null, true);
+    } else {
+      cb(new Error("Images only!"));
+    }
+  },
+});
+
+const uploadSingle = upload.single("image");
+
+// @desc Create a new pet
+// @route POST /api/pet/createPet
+// @access Private
+const createPet = asyncHandler(async (req, res) => {
+  uploadSingle(req, res, async (err) => {
+    if (err) {
+      res.status(400);
+      throw new Error(err.message);
+    }
+
+    const { name, breed, age, size, location, medicalHistory } = req.body;
+
+    if (!req.file) {
+      res.status(400);
+      throw new Error("Image is required for the pet");
+    }
+
+    const petExists = await Pet.findOne({ name, shelter: req.user._id });
+    if (petExists) {
+      res.status(400);
+      throw new Error("Pet already exists in your shelter");
+    }
+
+    const imagePath = `/src/${req.file.filename}`;
+
+    const pet = await Pet.create({
+      name,
+      breed,
+      age,
+      size,
+      location,
+      medicalHistory,
+      image: imagePath,
+      shelter: req.user._id,
+    });
+
+    if (pet) {
+      res.status(201).json(pet);
+    } else {
+      res.status(400);
+      throw new Error("Invalid pet data");
+    }
+  });
+});
+
+// @desc Get a specific pet by ID
+// @route GET /api/pets/:id
+// @access Private
+const getPet = asyncHandler(async (req, res) => {
+  const pet = await Pet.findById(req.params.id);
+
+  if (pet) {
+    res.status(200).json(pet);
+  } else {
+    res.status(404);
+    throw new Error("Pet not found");
+  }
+});
+
+// @desc Update a specific pet by ID
+// @route PUT /api/pets/:id
+// @access Private
+const updatePet = asyncHandler(async (req, res) => {
+  const pet = await Pet.findById(req.params.id);
+
+  if (pet) {
+    pet.name = req.body.name || pet.name;
+    pet.breed = req.body.breed || pet.breed;
+    pet.age = req.body.age || pet.age;
+    pet.size = req.body.size || pet.size;
+    pet.location = req.body.location || pet.location;
+    pet.medicalHistory = req.body.medicalHistory || pet.medicalHistory;
+
+    // Update image if provided
+    uploadSingle(req, res, async (err) => {
+      if (err) {
+        res.status(400);
+        throw new Error(err.message);
+      }
+
+      if (req.file) {
+        pet.image = `/src/${req.file.filename}`;
+      }
+
+      const updatedPet = await pet.save();
+      res.status(200).json(updatedPet);
+    });
+  } else {
+    res.status(404);
+    throw new Error("Pet not found");
+  }
+});
+
+// @desc Delete a specific pet by ID
+// @route DELETE /api/pets/:id
+// @access Private
+const deletePet = asyncHandler(async (req, res) => {
+  const pet = await Pet.findById(req.params.id);
+
+  if (pet) {
+    await pet.remove();
+    res.status(200).json({ message: "Pet deleted successfully" });
+  } else {
+    res.status(404);
+    throw new Error("Pet not found");
+  }
+});
+
+// @desc Get all pets for the authenticated shelter owner
+// @route GET /api/pets
+// @access Private
+const getAllPets = asyncHandler(async (req, res) => {
+  const pets = await Pet.find({ shelter: req.user._id });
+
+  if (pets.length > 0) {
+    res.status(200).json(pets);
+  } else {
+    res.status(404).json({ message: "No pets found for your shelter" });
+  }
+});
+
+// @desc Get all available pets for adoption
+// @route GET /api/pets/available
+// @access Public
+const getPets = asyncHandler(async (req, res) => {
+  try {
+    const pets = await Pet.find({ shelter: req.query.shelterId, isAdopted: false }); // Assuming an `isAdopted` field
+    if (pets.length > 0) {
+      res.status(200).json(pets);
+    } else {
+      res.status(404).json({ message: "No available pets found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching available pets", error });
+  }
+});
+
+export {
+  createPet,
+  updatePet,
+  getPet,
+  deletePet,
+  getAllPets,
+  getPets,
+};

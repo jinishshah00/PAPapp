@@ -1,36 +1,44 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const petSchema = mongoose.Schema({
-        name: { 
-            type: String, 
-            required: true 
-        },
-        breed: { 
-            type: String, 
-            required: true 
-        },
-        age: { 
-            type: Number, 
-            required: true 
-        },
-        size: { 
-            type: String, 
-            required: true 
-        },
-        location: { 
-            type: String, 
-            required: true 
-        },
-        medicalHistory: String,
-        shelter: { 
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'User', 
-            required: true 
-        }
-    }, 
-    {   
-        timestamps: true 
-    }
+const petSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, 'Please add a name for the pet'],
+    },
+    breed: {
+      type: String,
+      required: [true, 'Please add a breed'],
+    },
+    age: {
+      type: Number,
+      required: [true, 'Please add the pet\'s age'],
+    },
+    size: {
+      type: String,
+      required: [true, 'Please add the size of the pet'],
+    },
+    location: {
+      type: String,
+      required: [true, 'Please add a location'],
+    },
+    medicalHistory: {
+      type: String,
+      default: '',
+    },
+    shelter: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
+    image: {
+      type: String,
+      required: [true, 'Please add an image of the pet'],
+    },
+  },
+  {
+    timestamps: true,
+  }
 );
 
 const Pet = mongoose.model('Pet', petSchema);
