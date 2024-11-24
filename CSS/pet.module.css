@@ -1,6 +1,106 @@
+.filterCon{
+    width: 80%;
+    background: var(--secondary-color);
+    height: 30vh;
+    border-radius: 10px;
+    margin-top: -50px;
+}
+
+.petCardCon {
+    width: 80%;
+    max-width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
 .petCard{
+    margin: 10px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 13rem;
+    border-radius: 10px;
+    background: var(--secondary-color);
+}
+
+.petCard:hover {
+    cursor: pointer;
+    background: #e7dcb2;
+}
+
+.petCard img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.textCon {
+    padding: 0 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+.cardName{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.filterCon {
+    position: relative;
+    display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--secondary-color);
 }
+
+.filterForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+}
+
+.leftCon {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    gap: 10px;
+}
+
+.sizeCon {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonCon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.editButtonCon {
+    position: absolute;
+    right: 2%;
+    bottom: 5%;
+}
+
+.paginationCon {
+    margin-bottom: 50px;
+}
+
+  
+  

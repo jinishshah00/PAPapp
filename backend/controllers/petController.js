@@ -6,7 +6,7 @@ import path from "path";
 // Configure storage for multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(process.cwd(), "backend/src")); // Save images to the src folder
+    cb(null, path.join(process.cwd(), "public/img")); // Save images to the src folder
   },
   filename: (req, file, cb) => {
     const petName = req.body.name.replace(/\s+/g, "").toLowerCase();
@@ -54,7 +54,7 @@ const createPet = asyncHandler(async (req, res) => {
       throw new Error("Pet already exists in your shelter");
     }
 
-    const imagePath = `/src/${req.file.filename}`;
+    const imagePath = `/img/${req.file.filename}`;
 
     const pet = await Pet.create({
       name,
@@ -77,8 +77,8 @@ const createPet = asyncHandler(async (req, res) => {
 });
 
 // @desc Get a specific pet by ID
-// @route GET /api/pets/:id
-// @access Private
+// @route GET /api/pets/getPet
+// @access Public
 const getPet = asyncHandler(async (req, res) => {
   const pet = await Pet.findById(req.params.id);
 
@@ -91,7 +91,7 @@ const getPet = asyncHandler(async (req, res) => {
 });
 
 // @desc Update a specific pet by ID
-// @route PUT /api/pets/:id
+// @route PUT /api/pets/updatePet
 // @access Private
 const updatePet = asyncHandler(async (req, res) => {
   const pet = await Pet.findById(req.params.id);
@@ -112,7 +112,7 @@ const updatePet = asyncHandler(async (req, res) => {
       }
 
       if (req.file) {
-        pet.image = `/src/${req.file.filename}`;
+        pet.image = `img/${req.file.filename}`;
       }
 
       const updatedPet = await pet.save();
@@ -125,7 +125,7 @@ const updatePet = asyncHandler(async (req, res) => {
 });
 
 // @desc Delete a specific pet by ID
-// @route DELETE /api/pets/:id
+// @route DELETE /api/pets/deletePet
 // @access Private
 const deletePet = asyncHandler(async (req, res) => {
   const pet = await Pet.findById(req.params.id);
@@ -140,9 +140,9 @@ const deletePet = asyncHandler(async (req, res) => {
 });
 
 // @desc Get all pets for the authenticated shelter owner
-// @route GET /api/pets
+// @route GET /api/pets/getShelterPets
 // @access Private
-const getAllPets = asyncHandler(async (req, res) => {
+const getShelterPets = asyncHandler(async (req, res) => {
   const pets = await Pet.find({ shelter: req.user._id });
 
   if (pets.length > 0) {
@@ -153,26 +153,51 @@ const getAllPets = asyncHandler(async (req, res) => {
 });
 
 // @desc Get all available pets for adoption
-// @route GET /api/pets/available
+// @route GET /api/pets/getAllPets
 // @access Public
-const getPets = asyncHandler(async (req, res) => {
+const getAllPets = asyncHandler(async (req, res) => {
   try {
-    const pets = await Pet.find({ shelter: req.query.shelterId, isAdopted: false }); // Assuming an `isAdopted` field
+    const { breed, age, size, location } = req.query;
+
+    const query = {};
+    if (breed) query.breed = { $regex: breed, $options: 'i' };
+    if (age) query.age = age;
+    if (size) query.size = size;
+    if (location) query.location = { $regex: location, $options: 'i' };
+
+    const pets = await Pet.find({ ...query, isAdopted: false });
+
     if (pets.length > 0) {
       res.status(200).json(pets);
     } else {
-      res.status(404).json({ message: "No available pets found" });
+      res.status(404).json({ message: 'No pets found matching the criteria' });
     }
   } catch (error) {
-    res.status(500).json({ message: "Error fetching available pets", error });
+    res.status(500).json({ message: 'Error fetching pets', error });
+  }
+});
+
+// @desc Get distinct values for filters
+// @route GET /api/pets/distinct
+// @access Public
+const getDistinctValues = asyncHandler(async (req, res) => {
+  try {
+    const breeds = await Pet.distinct('breed', { isAdopted: false });
+    const ages = await Pet.distinct('age', { isAdopted: false });
+    const locations = await Pet.distinct('location', { isAdopted: false });
+
+    res.status(200).json({ breeds, ages, locations });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching filter options', error });
   }
 });
 
 export {
   createPet,
   updatePet,
-  getPet,
   deletePet,
+  getPet,
+  getShelterPets,
   getAllPets,
-  getPets,
+  getDistinctValues,
 };

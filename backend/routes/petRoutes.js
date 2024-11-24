@@ -1,15 +1,16 @@
 import express from 'express';
 const router = express.Router();
-// import { authUser, getUserProfile, logoutUser, registerUser, updateUserProfile } from '../controllers/userController.js';
 import { protect, roleCheck } from '../middleware/authMiddleware.js';
-import { createPet, deletePet, getAllPets, getPet, getPets, updatePet } from '../controllers/petController.js';
-// import { getPageFiles } from 'next/dist/server/get-page-files.js';
+import { createPet, deletePet, updatePet, getPet, getShelterPets, getAllPets, getDistinctValues} from '../controllers/petController.js';
+
 
 router.post('/createPet', protect, roleCheck, createPet);
 router.put('/updatePet', protect, roleCheck, updatePet);
-router.get('/getPet', getPet);
 router.delete('/deletePet',protect, roleCheck, deletePet);
-router.get('/getAllPets',protect, roleCheck, getAllPets);
-router.get('/getPets',getPets);
+router.get('/getPet', getPet);
+router.get('/getShelterPets',protect, roleCheck, getShelterPets);
+router.get('/getAllPets',getAllPets);
+router.get('/distinct', getDistinctValues);
+
 
 export default router;

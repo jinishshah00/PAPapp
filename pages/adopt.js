@@ -1,16 +1,12 @@
-import { Button } from '@mui/material';
-import { Edit } from '@mui/icons-material';
-import petPanel from '../components/petPanel';
+import PetPanel from '../components/petPanel';
+import styles from '../CSS/adopt.module.css'
 
 export default function Adopt({ isLoggedIn, userRole }) {
     return (
         <>
-            <petPanel />
-            {isLoggedIn && userRole === 'shelterOwner' && (
-                <Button href='/editPets' variant="contained" endIcon={<Edit />} sx={{ mt: 2 }}>
-                    Edit Pet Listings
-                </Button>
-            )}
+            <div className={styles.mainCon}>
+                <PetPanel isLoggedIn={isLoggedIn} userRole={userRole}/>
+            </div>
         </>
     );
 }

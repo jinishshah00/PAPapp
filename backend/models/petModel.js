@@ -35,6 +35,10 @@ const petSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add an image of the pet'],
     },
+    isAdopted: {
+      type: Boolean,
+      default: false,
+    }
   },
   {
     timestamps: true,

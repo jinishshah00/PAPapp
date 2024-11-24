@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv'; 
 import cors from 'cors';
-
+import path from 'path';
 dotenv.config(); //getting port number from dotenv 
 import cookieParser from 'cookie-parser';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
