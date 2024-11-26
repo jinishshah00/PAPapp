@@ -161,7 +161,7 @@ export default function PetPanel({ isLoggedIn, userRole }) {
       ) : (
         <div className={styles.petCardCon}>
           {displayedPets.map((pet) => (
-            <PetCard key={pet._id} name={pet.name} breed={pet.breed} location={pet.location} image={pet.image} />
+            <PetCard key={pet._id} id={pet._id} name={pet.name} breed={pet.breed} location={pet.location} image={pet.image} />
           ))}
         </div>
       )}

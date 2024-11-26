@@ -32,13 +32,15 @@ export default function MyApp({ Component, pageProps }) {
         setUserRole(role);
     };
     // Conditionally render header and footer only if the path is not "/login"
-    const showHeaderFooter = router.pathname !== '/login' && router.pathname !== '/register' && router.pathname !== '/updateProfile' && router.pathname !== '/addPet';
+    const showHeaderFooter = router.pathname !== '/login' && router.pathname !== '/register' && router.pathname !== '/updateProfile' && router.pathname !== '/register';
 
     return (
         <>
             <ThemeProvider theme={customTheme}>
                 {showHeaderFooter && <Header onAuthChange={handleAuthChange}/>}
-                <Component {...pageProps} isLoggedIn={isLoggedIn} userRole={userRole}/>
+                <div className='mainCon'>
+                  <Component {...pageProps} isLoggedIn={isLoggedIn} userRole={userRole}/>
+                </div>
                 {showHeaderFooter && <Footer />}
             </ThemeProvider>
         </>

@@ -59,14 +59,16 @@ export default function EditPetPanel() {
             {displayedPets.map((pet) => (
               <PetCard
                 key={pet._id}
+                id={pet._id}
                 name={pet.name}
                 breed={pet.breed}
                 location={pet.location}
                 image={pet.image}
+                isEditMode={true} 
               />
             ))}
           </div>
-          <div className={styles.paginationCon}>
+          <div>
             <Pagination
               count={Math.ceil(pets.length / itemsPerPage)} // Total number of pages
               page={currentPage}

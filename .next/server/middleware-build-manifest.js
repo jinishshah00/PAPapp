@@ -25,10 +25,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/adopt.js"
     ],
-    "/editPets": [
+    "/editPets/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/editPets.js"
+      "static/chunks/pages/editPets/[id].js"
+    ],
+    "/pet/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/pet/[id].js"
     ]
   },
   "ampFirstPages": []

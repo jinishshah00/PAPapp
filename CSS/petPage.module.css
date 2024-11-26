@@ -1,0 +1,70 @@
+.mainCon{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.petCon {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary-color);
+    margin-top: -50px;
+    border-radius: 10px;
+    /* justify-content: baseline; */
+    align-items: baseline; 
+    padding: 50px 0;
+    position: relative;
+}
+
+.image {
+    position: absolute;
+    width: 20rem;
+    height: 40vh;
+    object-fit: cover;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.imgCon{
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgCon img{
+    position: relative !important;
+    width: 20rem !important;
+    height: 50vh !important;
+    object-fit: cover;
+}
+
+.photoButtonCon {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.infoCon {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: 6rem;
+    margin-top: -10px;
+    flex-wrap: wrap; /* Allow content to wrap to the next line */
+}
+
+.infoCon h3 {
+    /* max-width: 90%; Limit the width to 60% of the container */
+    word-break: break-word; /* Ensure long words wrap */
+}

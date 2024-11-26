@@ -27,6 +27,10 @@ body {
     border-radius: 0 0 25px 25px;
 }
 
+.mainCon {
+    min-height: 70vh;
+}
+
 .navbar {
     display: flex;
     align-items: center;
@@ -89,7 +93,12 @@ body {
 
 
 .footer-con {
-    margin-top: -4vh;
+    /* position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); */
+    margin-top: -2vh;
+    /* padding-top: 30px; */
     justify-self: center;
     width: 80%;
     display: flex;

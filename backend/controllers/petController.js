@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import Pet from "../models/petModel.js";
 import multer from "multer";
 import path from "path";
+import fs from 'fs';
 
 // Configure storage for multer
 const storage = multer.diskStorage({
@@ -76,11 +77,49 @@ const createPet = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc Update a pet's image
+// @route PUT /api/pets/updatePetImage/:id
+// @access Private
+const updatePetImage = asyncHandler(async (req, res) => {
+  const pet = await Pet.findById(req.params.id);
+
+  if (!pet) {
+    res.status(404);
+    throw new Error("Pet not found");
+  }
+
+  // Process image upload using multer
+  uploadSingle(req, res, async (err) => {
+    if (err) {
+      res.status(400);
+      throw new Error(err.message);
+    }
+
+    if (!req.file) {
+      res.status(400);
+      throw new Error("No image file provided");
+    }
+
+    try {
+      const updatedPet = await pet.save();
+
+      res.status(200).json({
+        message: "Image updated successfully",
+        image: updatedPet.image,
+      });
+    } catch (error) {
+      res.status(500);
+      throw new Error("An error occurred while updating the pet image");
+    }
+  });
+});
+
+
 // @desc Get a specific pet by ID
 // @route GET /api/pets/getPet
 // @access Public
 const getPet = asyncHandler(async (req, res) => {
-  const pet = await Pet.findById(req.params.id);
+  const pet = await Pet.findById(req.params.id).populate('shelter', 'name email');
 
   if (pet) {
     res.status(200).json(pet);
@@ -125,16 +164,29 @@ const updatePet = asyncHandler(async (req, res) => {
 });
 
 // @desc Delete a specific pet by ID
-// @route DELETE /api/pets/deletePet
+// @route DELETE /api/pets/deletePet/:id
 // @access Private
 const deletePet = asyncHandler(async (req, res) => {
   const pet = await Pet.findById(req.params.id);
 
   if (pet) {
-    await pet.remove();
-    res.status(200).json({ message: "Pet deleted successfully" });
+    // Construct the full path of the image
+    const imagePath = path.join(process.cwd(), 'public', pet.image);
+
+    // Delete the pet document from the database
+    await Pet.deleteOne({ _id: req.params.id });
+
+    // Attempt to delete the image file
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.error(`Failed to delete image: ${imagePath}. Error: ${err.message}`);
+        // Not throwing an error here to allow the pet deletion to proceed
+      }
+    });
+
+    res.status(200).json({ message: "Pet and associated image deleted successfully" });
   } else {
-    res.status(404);
+    res.status(404); // Send not found response if pet doesn't exist
     throw new Error("Pet not found");
   }
 });
@@ -200,4 +252,5 @@ export {
   getShelterPets,
   getAllPets,
   getDistinctValues,
+  updatePetImage,
 };

@@ -3,6 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/editPets": "pages/editPets.js",
-  "/": "pages/index.js",
-  "/adopt": "pages/adopt.js"
+  "/editPets/[id]": "pages/editPets/[id].js",
+  "/adopt": "pages/adopt.js",
+  "/pet/[id]": "pages/pet/[id].js"
 }
