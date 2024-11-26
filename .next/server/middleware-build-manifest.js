@@ -10,6 +10,11 @@ self.__BUILD_MANIFEST = {
   "rootMainFiles": [],
   "rootMainFilesTree": {},
   "pages": {
+    "/": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -20,20 +25,15 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/adopt": [
+    "/editPets": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/adopt.js"
+      "static/chunks/pages/editPets.js"
     ],
-    "/editPets/[id]": [
+    "/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/editPets/[id].js"
-    ],
-    "/pet/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/pet/[id].js"
+      "static/chunks/pages/login.js"
     ]
   },
   "ampFirstPages": []

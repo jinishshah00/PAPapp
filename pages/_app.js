@@ -31,8 +31,10 @@ export default function MyApp({ Component, pageProps }) {
         setIsLoggedIn(loggedIn);
         setUserRole(role);
     };
+
+    const hiddenRoutes = ['/login', '/register', '/updateProfile', '/register', '/addPet'];
     // Conditionally render header and footer only if the path is not "/login"
-    const showHeaderFooter = router.pathname !== '/login' && router.pathname !== '/register' && router.pathname !== '/updateProfile' && router.pathname !== '/register';
+    const showHeaderFooter = !hiddenRoutes.includes(router.pathname);
 
     return (
         <>

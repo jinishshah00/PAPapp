@@ -18,6 +18,7 @@ export default function Home() {
                       </p>
                       <Button 
                         variant="contained" 
+                        href='/adopt'
                         endIcon={<Launch />}
                         sx={{
                             bgcolor: 'var(--primary-color)',

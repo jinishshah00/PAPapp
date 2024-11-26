@@ -35,6 +35,11 @@ export default function Header({ onAuthChange }) {
         checkLoginStatus();
     }, [onAuthChange]);
 
+    useEffect(() => {
+        // Close the dropdown whenever the route changes
+        setShowDropdown(false);
+    }, [router.pathname]);
+
     const handleLogout = async () => {
         try {
             await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/logout`, {}, { withCredentials: true });
@@ -77,7 +82,7 @@ export default function Header({ onAuthChange }) {
                             <div className="dropdown">
                                 <button onClick={() => router.push('/updateProfile')}>Update Profile</button>
                                 {userRole === 'shelterOwner' && (
-                                    <button onClick={() => router.push('/managePets')}>Manage Pets</button>
+                                    <button onClick={() => router.push('/editPets')}>Manage Pets</button>
                                 )}
                                 <button onClick={handleLogout}>Logout</button>
                             </div>
