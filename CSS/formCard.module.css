@@ -1,0 +1,72 @@
+.mainCon {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 13rem;
+    border-radius: 10px;
+    background: var(--secondary-color);
+    padding: 20px 0;
+    justify-content: center;
+}
+
+.mainCon img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-bottom: 20px;
+}
+
+.mainCon:hover {
+    cursor: pointer;
+    background: #e7dcb2;
+}
+
+.textCon {
+    padding-right: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cardName{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.accept {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: green;
+}
+
+.decline {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: red;
+}
+
+.resubmit {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: orange;
+}

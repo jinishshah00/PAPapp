@@ -1,0 +1,71 @@
+.mainCon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    margin-bottom: 10px;
+  }
+  
+  .petCon {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background: var(--secondary-color);
+    margin-top: -50px;
+    border-radius: 10px;
+    /* justify-content: baseline; */
+    align-items: baseline; 
+    padding: 30px 0;
+    position: relative;
+  }
+
+.petCon img {
+  position: absolute;
+  width: 20rem;
+  height: 40vh;
+  object-fit: cover;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.infoCon {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  gap: -10px;
+  width: 50%;
+}
+
+.infoCon h1 {
+  margin-bottom: 0px;
+}
+
+.infoCon h2 {
+  margin-bottom: 0px;
+}
+
+.infoCon h3 {
+  margin: 10px 0 20px 0;
+}
+
+.infoCon p {
+  margin-bottom: 5px;
+}
+
+.infoDiv {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 15px 0 10px 0;
+}
+
+.infoDiv h2 {
+  margin: 0px !important;
+}
+
+.buttonCon {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0 0 0;
+}

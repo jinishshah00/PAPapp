@@ -28,15 +28,30 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/editPets": [
+    "/adopt": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/editPets.js"
+      "static/chunks/pages/adopt.js"
+    ],
+    "/forms": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/forms.js"
     ],
     "/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/login.js"
+    ],
+    "/pet/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/pet/[id].js"
+    ],
+    "/viewForms/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/viewForms/[id].js"
     ]
   },
   "ampFirstPages": []

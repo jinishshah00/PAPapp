@@ -81,6 +81,7 @@ export default function Header({ onAuthChange }) {
                         {showDropdown && (
                             <div className="dropdown">
                                 <button onClick={() => router.push('/updateProfile')}>Update Profile</button>
+                                <button onClick={() => router.push('/forms')}>View Forms</button>
                                 {userRole === 'shelterOwner' && (
                                     <button onClick={() => router.push('/editPets')}>Manage Pets</button>
                                 )}
