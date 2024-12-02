@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 import userRoutes from './routes/userRoutes.js';
 import petRoutes from './routes/petRoutes.js';
 import formRoutes from './routes/formRoutes.js';
+import resourceRoutes from './routes/resourceRoutes.js';
 
 connectDB();
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/pets', petRoutes);
 app.use('/api/forms', formRoutes);
+app.use('/api/resources', resourceRoutes);
 
 app.get('/', (req, res) => res.send('Server is Ready'));
 
