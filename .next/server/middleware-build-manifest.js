@@ -30,30 +30,10 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/adopt.js"
     ],
-    "/form/[id]": [
+    "/chatbot": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/form/[id].js"
-    ],
-    "/forms": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/forms.js"
-    ],
-    "/login": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/login.js"
-    ],
-    "/pet/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/pet/[id].js"
-    ],
-    "/viewForms/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/viewForms/[id].js"
+      "static/chunks/pages/chatbot.js"
     ]
   },
   "ampFirstPages": []

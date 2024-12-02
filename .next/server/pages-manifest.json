@@ -3,10 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/adopt": "pages/adopt.js",
-  "/pet/[id]": "pages/pet/[id].js",
-  "/": "pages/index.js",
-  "/login": "pages/login.js",
-  "/form/[id]": "pages/form/[id].js",
-  "/forms": "pages/forms.js",
-  "/viewForms/[id]": "pages/viewForms/[id].js"
+  "/chatbot": "pages/chatbot.js",
+  "/": "pages/index.js"
 }
