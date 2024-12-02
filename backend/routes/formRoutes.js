@@ -10,6 +10,7 @@ import {
   checkFormExists,
   getFormsAdopter,
   getFormsShelterOwner,
+  getAdoptedFormsForShelterOwner
 } from '../controllers/formController.js';
 import { protect, roleCheck } from '../middleware/authMiddleware.js';
 
@@ -25,5 +26,7 @@ router.put('/:id/reject-date', protect, roleCheck, rejectAtRequestDate); // Reje
 router.put('/:id/new-date', protect, fetchNewDates); // Fetch new dates
 router.put('/:id/adopted', protect, roleCheck, setStatusToAdopted); // Mark as adopted
 router.get('/:id', protect, getFormData); // Get form data
+router.get('/shelter/adopted', protect, roleCheck, getAdoptedFormsForShelterOwner);
+
 
 export default router;

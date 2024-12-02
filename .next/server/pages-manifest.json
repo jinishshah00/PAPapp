@@ -1,6 +1,12 @@
 {
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/": "pages/index.js"
+  "/_document": "pages/_document.js",
+  "/adopt": "pages/adopt.js",
+  "/pet/[id]": "pages/pet/[id].js",
+  "/forms": "pages/forms.js",
+  "/viewForms/[id]": "pages/viewForms/[id].js",
+  "/form/[id]": "pages/form/[id].js",
+  "/": "pages/index.js",
+  "/login": "pages/login.js"
 }

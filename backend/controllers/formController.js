@@ -206,6 +206,31 @@ const checkFormExists = asyncHandler(async (req, res) => {
       res.status(500).json({ message: 'Server error. Please try again later.' });
     }
   });  
+
+  // Get forms with status 'adopted' for a specific shelter owner
+const getAdoptedFormsForShelterOwner = asyncHandler(async (req, res) => {
+  try {
+    const shelterOwnerId = req.user._id; // Get the shelter owner's ID from the authenticated user
+
+    // Fetch forms with 'adopted' status and populate related data
+    const adoptedForms = await AdoptionForm.find({ status: 'adopted' })
+      .populate({
+        path: 'pet',
+        match: { shelter: shelterOwnerId }, // Ensure the pet belongs to the shelter owner
+        select: 'name breed age image shelter', // Fields to populate for the pet
+      })
+      .populate('adopter', 'name email'); // Populate adopter details
+
+    // Filter out forms where the pet does not belong to the current shelter owner
+    const filteredForms = adoptedForms.filter((form) => form.pet !== null);
+
+    res.status(200).json(filteredForms);
+  } catch (error) {
+    console.error('Error fetching adopted forms:', error);
+    res.status(500).json({ message: 'Server error. Please try again later.' });
+  }
+});
+
   
 export {
     createAdoptionForm,
@@ -218,4 +243,5 @@ export {
     checkFormExists,
     getFormsAdopter,
     getFormsShelterOwner,
+    getAdoptedFormsForShelterOwner,
 };
