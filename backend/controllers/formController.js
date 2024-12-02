@@ -66,7 +66,7 @@ const rejectAtRequestDate = asyncHandler(async (req, res) => {
         throw new Error('Form not found');
     }
 
-    form.status = 'rejected at request date';
+    form.status = 'rescheduled';
     const updatedForm = await form.save();
     res.json(updatedForm);
 });
@@ -74,8 +74,9 @@ const rejectAtRequestDate = asyncHandler(async (req, res) => {
 // Fetch new dates from adopter
 const fetchNewDates = asyncHandler(async (req, res) => {
     const form = await AdoptionForm.findById(req.params.id);
+    console.log(form);
 
-    if (!form || form.status !== 'rejected at request date') {
+    if (!form || form.status !== 'rescheduled') {
         res.status(400);
         throw new Error('Invalid form or status does not allow this operation');
     }

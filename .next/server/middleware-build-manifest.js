@@ -30,6 +30,11 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/adopt.js"
     ],
+    "/form/[id]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/form/[id].js"
+    ],
     "/forms": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

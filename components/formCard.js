@@ -35,6 +35,12 @@ export default function FormCard({ petName, status, image, adopterName, userRole
             Declined
           </div>
         )}
+        {status === 'rescheduled' && (
+          <div className={styles.cardName}>
+            <History sx={{ padding: '0px 10px' }} />
+            Rescheduled
+          </div>
+        )}
         {status === 'adopted' && (
           <div className={styles.accept}>
             <Pets sx={{ padding: '0px 10px' }} />
