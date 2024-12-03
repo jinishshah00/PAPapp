@@ -8,6 +8,7 @@ const createResource = asyncHandler(async (req, res) => {
         title,
         content,
         lastUpdatedBy: null,
+        nameOfLastUpdated: req.user.name,
     });
 
     const createdResource = await resource.save();
@@ -22,6 +23,7 @@ const getResource = asyncHandler(async (req, res) => {
 const updateResource = asyncHandler(async (req, res) => {
     const { title, content } = req.body;
     const userId = req.user._id; // Get user ID from authenticated request
+    const nameOfUser = req.user.name; // Get user name from authenticated request
   
     const resource = await Resource.findById(req.params.id);
   
@@ -29,6 +31,9 @@ const updateResource = asyncHandler(async (req, res) => {
       resource.title = title || resource.title;
       resource.content = content || resource.content;
       resource.lastUpdatedBy = userId;
+      resource.nameOfLastUpdated = nameOfUser;
+      //console.log("user", nameOfUser);
+
   
       const updatedResource = await resource.save();
       res.json(updatedResource);

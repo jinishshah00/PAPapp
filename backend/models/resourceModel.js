@@ -12,7 +12,11 @@ const resourceSchema = mongoose.Schema({
         lastUpdatedBy: { 
             type: mongoose.Schema.Types.ObjectId, 
             ref: 'User' 
-        }, // Tracks the last user who edited it
+        },
+        nameOfLastUpdated: {
+            type: String,
+            ref: 'User'
+        } // Tracks the last user who edited it
     }, 
     { 
         timestamps: true 

@@ -114,7 +114,7 @@ export default function VitalsPage({ userRole, isLoggedIn }) {
       )}
       <h3>
         Last Edited by{" "}
-        {resource.lastUpdatedBy ? `User ID: ${resource.lastUpdatedBy}` : "Unknown"} -{" "}
+        {resource.lastUpdatedBy ? `${resource.nameOfLastUpdated}` : "Unknown"} -{" "}
         {new Date(resource.updatedAt).toLocaleString()}
       </h3>
     </div>
