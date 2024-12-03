@@ -44,58 +44,60 @@ export default function Footer() {
   return (
     <div className='footer-con'>
       <h4>Copyright © 2024. All Rights Reserved.</h4>
-      <Button
-        startIcon={<Phone />}
-        size='large'
-        sx={{
-          color: 'var(--primary-color)',
-        }}
-      >
-        Contact Us
-      </Button>
-      <Button
-        startIcon={<Chat />}
-        size='large'
-        onClick={toggleChat}
-        sx={{
-          color: 'var(--primary-color)',
-        }}
-      >
-        Chat with Us
-      </Button>
+      <div>
+        <Button
+          startIcon={<Phone />}
+          size='large'
+          sx={{
+            color: 'var(--primary-color)',
+          }}
+        >
+          Contact Us
+        </Button>
+        <Button
+          startIcon={<Chat />}
+          size='large'
+          onClick={toggleChat}
+          sx={{
+            color: 'var(--primary-color)',
+          }}
+        >
+          Chat with Us
+        </Button>
 
-      {/* Chatbot Modal */}
-      <Dialog open={chatOpen} onClose={toggleChat} fullWidth maxWidth='sm'>
-        <DialogTitle>Pet Adoption Assistant</DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit} className={styles.chatbotForm}>
-            <TextField
-              fullWidth
-              multiline
-              rows={4}
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Type your question here..."
-              variant="outlined"
-              required
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={loading}
-              sx={{ marginTop: '1rem' }}
-            >
-              {loading ? <CircularProgress size={24} /> : 'Ask'}
-            </Button>
-          </form>
-          {response && (
-            <div className={styles.response}>
-              <strong>Assistant:</strong> {response}
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+        {/* Chatbot Modal */}
+        <Dialog open={chatOpen} onClose={toggleChat} fullWidth maxWidth='sm'>
+          <DialogTitle>Pet Adoption Assistant</DialogTitle>
+          <DialogContent>
+            <form onSubmit={handleSubmit} className={styles.chatbotForm}>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Type your question here..."
+                variant="outlined"
+                required
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={loading}
+                sx={{ marginTop: '1rem' }}
+              >
+                {loading ? <CircularProgress size={24} /> : 'Ask'}
+              </Button>
+            </form>
+            {response && (
+              <div className={styles.response}>
+                <strong>Assistant:</strong> {response}
+              </div>
+            )}
+          </DialogContent>
+        </Dialog>
+      </div>
     </div>
   );
 }

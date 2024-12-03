@@ -21,19 +21,22 @@ const getResource = asyncHandler(async (req, res) => {
 
 const updateResource = asyncHandler(async (req, res) => {
     const { title, content } = req.body;
-
+    const userId = req.user._id; // Get user ID from authenticated request
+  
     const resource = await Resource.findById(req.params.id);
-
+  
     if (resource) {
-        resource.title = title;
-        resource.content = content;
-
-        const updatedResource = await resource.save();
-        res.json(updatedResource);
+      resource.title = title || resource.title;
+      resource.content = content || resource.content;
+      resource.lastUpdatedBy = userId;
+  
+      const updatedResource = await resource.save();
+      res.json(updatedResource);
     } else {
-        res.status(404);
-        throw new Error("Resource not found");
+      res.status(404);
+      throw new Error("Resource not found");
     }
-});
+  });
+  
 
 export { getResource, updateResource, createResource };

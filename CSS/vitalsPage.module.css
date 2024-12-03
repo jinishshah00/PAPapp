@@ -1,0 +1,8 @@
+.mainCon {
+    width: 75%;
+    margin: -50px 10% 0 10%;
+    border-radius: 10px;
+    min-height: 60vh;
+    background: var(--secondary-color);
+    padding: 2.5%;
+}

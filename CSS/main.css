@@ -97,8 +97,8 @@ body {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%); */
-    margin-top: -2vh;
     /* padding-top: 30px; */
+    margin-top: 20px;
     justify-self: center;
     width: 80%;
     display: flex;
